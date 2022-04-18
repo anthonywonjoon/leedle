@@ -1,0 +1,42 @@
+body {
+    background-color: #379392;
+}
+
+.header {
+    width:100%;
+    text-align: center;
+}
+
+.sheet {
+    display: grid;
+    grid-template: 75px 75px 75px 75px 75px 75px / 75px 75px 75px 75px 75px;
+    width: 100%;
+    justify-content: center;
+    grid-row-gap: 10px;
+    grid-column-gap: 10px;
+}
+
+.sheet div {
+    border: 1px solid black;
+    text-align: center;
+    background-color: #4F86C6;
+}
+
+.letter_sheet {
+    padding-top: 20px;
+}
+
+.letter_sheet_row {
+    display:flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.letter_sheet_row button {
+    text-align:center;
+    width: 75px;
+    height: 75px;
+    margin: 10px;
+    cursor: pointer;
+}
+
