@@ -13,9 +13,13 @@
 <script>
     let num_of_guesses = 6;
     let guesses_left = num_of_guesses;
-    let nextBox = 0;
+    let nextLetter = 0;
     let currGuess = [];
     let theWord = WORDS[Math.floor(Math.random() * WORDS.length)];
+    let wordArr = [];
+    for (i = 0; i < theWord.length; i++){
+        wordArr[i] = theWord.charAt(i);
+    }
     console.log(theWord);
 
     addEventListener("keyup", (e) => {
@@ -47,8 +51,60 @@
             return;
         }
         pressedKey = pressedKey.toLowerCase();
-        let row = document.getElementById("box_row")
+        let currRow = document.querySelectorAll("#box" + `${nextLetter}` );
+        console.log(currRow);
+        let row = currRow[num_of_guesses - guesses_left];
+        // let row = document.getElementById("box" + (nextLetter));
+
+        row.classList.add("filled-box");
+
+        row.innerHTML = pressedKey.toUpperCase();
+        nextLetter++;
+        currGuess.push(pressedKey);
     }
+
+    function removeKey(){
+        if (nextLetter === 0){
+            return;
+        }
+
+        let row = document.getElementById("box" + (nextLetter - 1));
+        row.innerHTML = "";
+        row.classList.remove("filled-box");
+        nextLetter--;
+        currGuess.pop();
+    }
+
+    function guess() {
+
+        let boxArr = [];
+        for (i = 0; i < wordArr.length; i++){
+            for (j = 0; j < wordArr.length; j++){
+                if (currGuess[i] == wordArr[j]){
+                    if (i == j){
+                        boxArr[i] = 2;
+                    } else {
+                        boxArr[i] = 1;
+                    }
+                } else {
+                    boxArr[i] = 0;
+                }
+            }
+
+            if (boxArr[i] == 2){
+                document.getElementById("box" + i).classList.add("correct");
+            } else if (boxArr[i] == 1){
+                document.getElementById("box" + i).classList.add("has_letter");
+            } else {
+                document.getElementById("box" + i).classList.add("incorrect");
+            }
+        }
+
+        console.log(boxArr);
+
+
+    }
+
 </script>
 
 <body>
@@ -61,27 +117,27 @@
             for (i = 0; i < 31; i++){
                 if (i < 5) {
                     document.write(`
-                        <div class="box${i} first_row"></div>
+                        <div id="box${i}" class="box${i} first_row"></div>
                     `)
                 } else if (i > 5 && i <= 10){
                     document.write(`
-                        <div class="box${i} second_row"></div>
+                        <div id="box${i}" class="box${i} second_row"></div>
                     `)
                 } else if (i > 10 && i <= 15){
                     document.write(`
-                        <div class="box${i} third_row"></div>
+                        <div id="box${i}" class="box${i} third_row"></div>
                     `)
                 } else if (i > 15 && i <= 20){
                     document.write(`
-                        <div class="box${i} fourth_row"></div>
+                        <div id="box${i}" class="box${i} fourth_row"></div>
                     `)
                 } else if (i > 20 && i <= 25){
                     document.write(`
-                        <div class="box${i} fifth_row"></div>
+                        <div id="box${i}" class="box${i} fifth_row"></div>
                     `)
                 } else if (i > 25 && i <= 30){
                     document.write(`
-                        <div class="box${i} sixth_row"></div>
+                        <div id="box${i}" class="box${i} sixth_row"></div>
                     `)
                 }
             }
@@ -97,7 +153,7 @@
                     currentChar = top_row.charAt(i);
                     currentStr = currentChar.toUpperCase();
                     document.write(`
-                        <button class="keyboard-button">${currentStr}</button>
+                        <button class="keyboard-button" onclick="insertKey('${currentStr}')">${currentStr}</button>
                     `)
                 }
             </script>
@@ -108,23 +164,23 @@
                     currentChar = mid_row.charAt(i);
                     currentStr = currentChar.toUpperCase();
                     document.write(`
-                        <button class="keyboard-button">${currentStr}</button>
+                        <button class="keyboard-button" onclick="insertKey('${currentStr}')">${currentStr}</button>
                     `)
                 }
             </script>
         </div>
         <div class="letter_sheet_row">
-            <button type="keyboard-button" class="del" style="width: 100px">DEL</button>
+            <button class="del" onclick="removeKey()" style="width: 100px">DEL</button>
             <script>
                 for (i = 0; i < bot_row.length; i++){
                     currentChar = bot_row.charAt(i);
                     currentStr = currentChar.toUpperCase();
                     document.write(`
-                        <button class="keyboard-button">${currentStr}</button>
+                        <button class="keyboard-button" onclick="insertKey('${currentStr}')">${currentStr}</button>
                     `)
                 }
             </script>
-            <button type="keyboard-button" class="enter" style="width: 150px">ENTER</button>
+            <button type="keyboard-button" class="enter" onclick="guess()" style="width: 150px">ENTER</button>
         </div>
     </div>
 </body>

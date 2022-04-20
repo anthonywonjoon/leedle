@@ -1,10 +1,11 @@
 body {
-    background-color: #379392;
+    background-color: #121213;
 }
 
 .header {
     width:100%;
     text-align: center;
+    color: white;
 }
 
 .sheet {
@@ -17,13 +18,13 @@ body {
 }
 
 .sheet div {
-    border: 1px solid black;
+    border: 1px solid lightgray;
     text-align: center;
-    background-color: #4F86C6;
+    
 }
 
 .letter_sheet {
-    padding-top: 20px;
+    padding-top: 200px;
 }
 
 .letter_sheet_row {
@@ -37,6 +38,31 @@ body {
     width: 75px;
     height: 75px;
     margin: 10px;
+
     cursor: pointer;
+
+    color: black;
+    border-radius:10px;
+    background-color: rgb(95, 95, 95);
+
+    font-size: 30px;
 }
 
+.filled-box {
+    color: white;
+    font-size: 30px;
+    font-weight: bolder;
+    vertical-align: center;
+}
+
+.correct {
+    background-color: green;
+}
+
+.has_letter {
+    background-color: yellow;
+}
+
+.incorrect {
+    background-color: grey;
+}
