@@ -68,6 +68,10 @@
             return;
         }
 
+        if (document.getElementById("box" + 1).classList.contains("correct" || "has_letter" || "incorrect")){
+            return;
+        }
+
         let row = document.getElementById("box" + (nextLetter - 1));
         row.innerHTML = "";
         row.classList.remove("filled-box");
@@ -76,33 +80,26 @@
     }
 
     function guess() {
-
-        let boxArr = [];
+        if (nextLetter != 5){
+            return;
+        }
         for (i = 0; i < wordArr.length; i++){
-            for (j = 0; j < wordArr.length; j++){
-                if (currGuess[i] == wordArr[j]){
-                    if (i == j){
-                        boxArr[i] = 2;
-                    } else {
-                        boxArr[i] = 1;
+            if (wordArr.includes(currGuess[i])){
+                for (j = 0; j < wordArr.length; j++){
+                    if (wordArr[j] == currGuess[i]){
+                        if (i == j){
+                            document.getElementById("box" + i).classList.add("correct");
+                            break;
+                        } else {
+                            document.getElementById("box" + i).classList.add("has_letter");
+                            break;
+                        }
                     }
-                } else {
-                    boxArr[i] = 0;
                 }
-            }
-
-            if (boxArr[i] == 2){
-                document.getElementById("box" + i).classList.add("correct");
-            } else if (boxArr[i] == 1){
-                document.getElementById("box" + i).classList.add("has_letter");
             } else {
                 document.getElementById("box" + i).classList.add("incorrect");
             }
         }
-
-        console.log(boxArr);
-
-
     }
 
 </script>
