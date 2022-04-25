@@ -13,12 +13,15 @@
 <script>
     let num_of_guesses = 6;
     let guesses_left = num_of_guesses;
+    let line = 1;
     let nextLetter = 0;
     let currGuess = [];
     let theWord = WORDS[Math.floor(Math.random() * WORDS.length)];
     let wordArr = [];
+    let wordIter = []
     for (i = 0; i < theWord.length; i++){
         wordArr[i] = theWord.charAt(i);
+        wordIter[i] = theWord.charAt(i);
     }
     console.log(theWord);
 
@@ -47,20 +50,31 @@
     });
 
     function insertKey(pressedKey){
+        console.log(line);
         if (nextLetter === 5) {
             return;
         }
         pressedKey = pressedKey.toLowerCase();
-        let currRow = document.querySelectorAll("#box" + `${nextLetter}` );
-        console.log(currRow);
-        let row = currRow[num_of_guesses - guesses_left];
-        // let row = document.getElementById("box" + (nextLetter));
-
-        row.classList.add("filled-box");
-
-        row.innerHTML = pressedKey.toUpperCase();
+        
+        console.log("First row test");
+        currentBox = document.getElementsByClassName("row" + line)[nextLetter];
+        currentBox.classList.add("filled-box");
+        currentBox.innerHTML = pressedKey.toUpperCase();
         nextLetter++;
         currGuess.push(pressedKey);
+
+        // let currRow = document.querySelectorAll("#box" + `${nextLetter}` );
+        // console.log(currRow);
+        // let row = currRow[num_of_guesses - guesses_left];
+        // // let row = document.getElementById("box" + (nextLetter));
+
+        // row.classList.add("filled-box");
+
+        // row.innerHTML = pressedKey.toUpperCase();
+        // nextLetter++;
+        // currGuess.push(pressedKey);
+    
+
     }
 
     function removeKey(){
@@ -68,11 +82,11 @@
             return;
         }
 
-        if (document.getElementById("box" + 1).classList.contains("correct" || "has_letter" || "incorrect")){
+        if (document.getElementsByClassName("row" + line)[nextLetter].classList.contains("correct" || "has_letter" || "incorrect")){
             return; 
         }
 
-        let row = document.getElementById("box" + (nextLetter - 1));
+        let row = document.getElementsByClassName("row" + line)[nextLetter - 1];
         row.innerHTML = "";
         row.classList.remove("filled-box");
         nextLetter--;
@@ -83,44 +97,38 @@
         if (nextLetter != 5){
             return;
         }
-
-        wordIter = wordArr;
+        
         for (i = 0; i < wordArr.length; i++){
-            if (wordIter.includes(currGuess[i])){
+            if (wordArr.includes(currGuess[i])){
                 for (j = 0; j < wordArr.length; j++){
-                    if (wordIter[0] == currGuess[j]){
-                        document.getElementById("box" + wordArr.indexOf(currGuess[j])).classList.add("correct");
-                        wordIter.shift();
-                        break;
-                    } else {
-                        document.getElementById("box" + i).classList.add("has_letter");
-                        break;
+                    if (wordArr[j] == currGuess[i]){
+                        if (i == j){
+                            if (wordIter[j] == null){
+                                
+                            }
+                            console.log("Correct Spot: " + wordArr[j] + " and " +currGuess[i]);
+                            document.getElementsByClassName("row" + line)[j].classList.add("correct");
+                            wordIter[j] = null;
+                            break;
+                        } else {
+                            console.log("Wrong Spot: " + wordArr[j] + " indexes " + j + " and " + i);
+                            document.getElementsByClassName("row" + line)[i].classList.add("has_letter");
+                             break;
+                        }
+                    }
                 }
-                }
-               
             } else {
-                document.getElementById("box" + i).classList.add("incorrect");
+                document.getElementsByClassName("row" + line)[i].classList.add("incorrect");
             }
         }
+        currGuess = [];
+        line++;
+        num_of_guesses--;
+        nextLetter = 0;
 
-
-        // for (i = 0; i < wordArr.length; i++){
-        //     if (wordArr.includes(currGuess[i])){
-        //         for (j = 0; j < wordArr.length; j++){
-        //             if (wordArr[j] == currGuess[i]){
-        //                 if (i == j){
-        //                     document.getElementById("box" + i).classList.add("correct");
-        //                     break;
-        //                 } else {
-        //                     document.getElementById("box" + i).classList.add("has_letter");
-        //                     break;
-        //                 }
-        //             }
-        //         }
-        //     } else {
-        //         document.getElementById("box" + i).classList.add("incorrect");
-        //     }
-        // }
+        if (document.getElementsByClassName("row" + (line - 1))[0].classList.contains("correct") & document.getElementsByClassName("row" + (line - 1))[1].classList.contains("correct") & document.getElementsByClassName("row" + (line - 1))[2].classList.contains("correct") & document.getElementsByClassName("row" + (line - 1))[3].classList.contains("correct") & document.getElementsByClassName("row" + (line - 1))[4].classList.contains("correct") ) {
+            alert("You win!")
+        }
     }
 
 </script>
@@ -132,30 +140,30 @@
     </div>
     <div class="sheet">
         <script>
-            for (i = 0; i < 31; i++){
+            for (i = 0; i < 30; i++){
                 if (i < 5) {
                     document.write(`
-                        <div id="box${i}" class="box${i} first_row"></div>
+                        <div id="box${i}" class="box${i} row1"></div>
                     `)
-                } else if (i > 5 && i <= 10){
+                } else if (i >= 5 && i < 10){
                     document.write(`
-                        <div id="box${i}" class="box${i} second_row"></div>
+                        <div id="box${i}" class="box${i} row2"></div>
                     `)
-                } else if (i > 10 && i <= 15){
+                } else if (i >= 10 && i < 15){
                     document.write(`
-                        <div id="box${i}" class="box${i} third_row"></div>
+                        <div id="box${i}" class="box${i} row3"></div>
                     `)
-                } else if (i > 15 && i <= 20){
+                } else if (i >= 15 && i < 20){
                     document.write(`
-                        <div id="box${i}" class="box${i} fourth_row"></div>
+                        <div id="box${i}" class="box${i} row4"></div>
                     `)
-                } else if (i > 20 && i <= 25){
+                } else if (i >= 20 && i < 25){
                     document.write(`
-                        <div id="box${i}" class="box${i} fifth_row"></div>
+                        <div id="box${i}" class="box${i} row5"></div>
                     `)
-                } else if (i > 25 && i <= 30){
+                } else if (i >= 25 && i < 30){
                     document.write(`
-                        <div id="box${i}" class="box${i} sixth_row"></div>
+                        <div id="box${i}" class="box${i} row6"></div>
                     `)
                 }
             }
