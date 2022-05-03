@@ -75,6 +75,8 @@ function guess() {
         }
     }
 
+
+
     if (document.getElementsByClassName("box" + 0)[row].classList.contains("correct") &&
         document.getElementsByClassName("box" + 1)[row].classList.contains("correct") &&
         document.getElementsByClassName("box" + 2)[row].classList.contains("correct") &&
