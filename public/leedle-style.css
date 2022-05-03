@@ -1,3 +1,7 @@
+body {
+    background: #387AC7;
+}
+
 .leedle_header {
     width: 100%;
     text-align: center;
@@ -7,6 +11,7 @@
     display: grid;
     grid-template-columns: repeat(5, 75px);
     grid-template-rows: repeat(6, 75px);
+    grid-gap: 5px;
 
     width: 100%;
     text-align: center;
@@ -15,27 +20,39 @@
 }
 
 .leedle_grid_container div {
-    border: 1px solid black;
+    border: 1px solid #38C1C7;
 }
 
-.leedle_letter_top, .leedle_letter_bot {
-    display: grid;
-    grid-template-columns: repeat(10, 75px);
-    grid-template-rows: 75px;
+.leedle_letter_container {
+    padding-top: 100px;
+}
 
+.leedle_letter_top, .leedle_letter_mid, .leedle_letter_bot {
+    display: flex;
     width: 100%;
     justify-content: center;
 }
 
-.leedle_letter_mid {
-    display: grid;
-    grid-template-columns: repeat(9, 75px);
-    grid-template-rows: 75px;
+.keyboard-button {
+    width: 75px;
+    height: 75px;
+    margin: 5px;
 
-    width: 100%;
-    justify-content: center;
+    background-color: #38C1C7;
 }
 
 .letter {
     border: 1px solid black;
+}
+
+.correct {
+    background-color: green;
+}
+
+.correct_letter {
+    background-color: yellow;
+}
+
+.incorrect {
+    background-color: red;
 }

@@ -5,13 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./leedle-style.css">
-    <script src="./script.js"></script>
+    <script src="./words.js"></script>
+    <script type="text/javascript" src="./script.js"></script>
     <title>Document</title>
-    <script>
-        let topLetters = "qwertyuiop";
-        let midLetters = "asdfghjkl";
-        let botLetters = "zxcvbnm";
-    </script>
 </head>
 <body>
     <div class="leedle_header">
@@ -20,11 +16,27 @@
     <div class="leedle_grid_container">
         <script>
             for(i = 0; i < 30; i++){
-                document.write(`
-                    <div class="box${i}" id="box${i}">
-                        x
-                    </div>
-                `)
+                if (i == 0 || i == 5 || i == 10 || i == 15 || i == 20 || i == 25){
+                    document.write(`
+                        <div class="box${0}" id="box${i}"></div>
+                    `);
+                } else if (i == 1 || i == 6 || i == 11 || i == 16 || i == 21 || i == 26){
+                    document.write(`
+                        <div class="box${1}" id="box${i}"></div>
+                    `);   
+                } else if (i == 2 || i == 7 || i == 12 || i == 17 || i == 22 || i == 27){
+                    document.write(`
+                        <div class="box${2}" id="box${i}"></div>
+                    `); 
+                } else if (i == 3 || i == 8 || i == 13 || i == 18 || i == 23 || i == 28){
+                    document.write(`
+                        <div class="box${3}" id="box${i}"></div>
+                    `); 
+                } else if (i == 4 || i == 9 || i == 14 || i == 19 || i == 24 || i == 29){
+                    document.write(`
+                        <div class="box${4}" id="box${i}"></div>
+                    `); 
+                } 
             }
         </script>
     </div>
@@ -32,10 +44,9 @@
         <div class="leedle_letter_top">
             <script>
                 for(i = 0; i < topLetters.length; i++){
+                    currString = topLetters.charAt(i).toUpperCase();
                     document.write(`
-                        <div class="${topLetters.charAt(i)} letter" id="${topLetters.charAt(i)}">
-                            ${topLetters.charAt(i).toUpperCase()}
-                        </div>
+                    <button class="keyboard-button" id="topLetters.charAt(i)" onclick='insertKey("${currString}")' >${currString}</button>
                     `)
                 }
             </script>
@@ -43,26 +54,24 @@
         <div class="leedle_letter_mid">
             <script>
                 for (i = 0; i < midLetters.length; i++){
+                    currString = midLetters.charAt(i).toUpperCase();
                     document.write(`
-                        <div class="${midLetters.charAt(i)} letter" id="${midLetters.charAt(i)}">
-                            ${midLetters.charAt(i).toUpperCase()}
-                        </div>
+                    <button class="keyboard-button" id="midLetters.charAt(i)" onclick='insertKey("${currString}")'>${midLetters.charAt(i).toUpperCase()}</button>
                     `)
                 }
             </script>
         </div>
         <div class="leedle_letter_bot">
-            <div class="DEL letter" id="DEL" style="width: 100px">DEL</div>
+            <button class="keyboard-button" id="del" style="width: 100px" onclick="removeKey()">DEL</button>
             <script>
                 for (i = 0; i < botLetters.length; i++){
+                    currString = botLetters.charAt(i).toUpperCase();
                     document.write(`
-                        <div class="${botLetters.charAt(i)} letter" id="${botLetters.charAt(i)}">
-                            ${botLetters.charAt(i).toUpperCase()}
-                        </div>
-                    `)
+                        <button class="keyboard-button" id=${botLetters.charAt(i)} onclick='insertKey("${currString}")'>${botLetters.charAt(i).toUpperCase()}</button>
+                    `);
                 }
             </script>
-            <div class="ENT letter" id="ENT" style="width: 100px">ENTER</div>
+            <button class="keyboard-button" id="ent" style="width: 100px" onclick="guess()">ENTER</button>
         </div>
     </div>
 </body>
