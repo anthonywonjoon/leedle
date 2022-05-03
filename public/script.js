@@ -11,6 +11,19 @@ let row_guess = [false, false, false, false, false];
 
 let userGuess = "";
 
+document.addEventListener("keyup", function(event) {
+    var pressedKey = event.key.toUpperCase();
+    console.log(pressedKey);
+    if (pressedKey == "BACKSPACE"){
+        removeKey();
+    } else if (pressedKey == "ENTER"){
+        guess();
+    } else {
+        insertKey(pressedKey);
+    }
+    
+})
+
 function insertKey(key) { // function for inserting key onclick, takes param key
     if (
         nextSpace == 5 && row_guess[0] == false || 
@@ -28,7 +41,7 @@ function insertKey(key) { // function for inserting key onclick, takes param key
 }
 
 function removeKey(){ // function for removing the last key
-    if (nextSpace == 0 || nextSpace == 5 || nextSpace == 10 || nextSpace == 15 || nextSpace == 20 || nextSpace == 25){
+    if (nextSpace == 0 || nextSpace == 5 && row_guess[row - 1] == true ){
         return;
     }
     document.getElementsByClassName("box" + (nextSpace - 1))[row].innerHTML = "";
@@ -46,11 +59,19 @@ function guess() {
         if (word.includes(tempGuess.charAt(i))){
             if (word.indexOf(tempGuess.charAt(i)) == i || word.lastIndexOf(tempGuess.charAt(i)) == i){
                 document.getElementsByClassName("box" + i)[row].classList.add("correct");
+                document.getElementsByClassName("box" + i)[row].classList.add("flip-horizontal-bottom");
+                if (document.getElementById(tempGuess.charAt(i)).classList.contains("correct_letter")){
+                    document.getElementById(tempGuess.charAt(i)).classList.remove("correct_letter");
+                }
+                document.getElementById(tempGuess.charAt(i)).classList.add("correct");
+                
             } else {
                 document.getElementsByClassName("box" + i)[row].classList.add("correct_letter");
+                document.getElementById(tempGuess.charAt(i)).classList.add("correct_letter");
             }
         } else {
             document.getElementsByClassName("box" + i)[row].classList.add("incorrect");
+            document.getElementById(tempGuess.charAt(i)).classList.add("incorrect");
         }
     }
 

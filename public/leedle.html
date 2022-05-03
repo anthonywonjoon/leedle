@@ -46,7 +46,7 @@
                 for(i = 0; i < topLetters.length; i++){
                     currString = topLetters.charAt(i).toUpperCase();
                     document.write(`
-                    <button class="keyboard-button" id="topLetters.charAt(i)" onclick='insertKey("${currString}")' >${currString}</button>
+                    <button class="keyboard-button" id="${topLetters.charAt(i)}" onclick='insertKey("${currString}")' >${currString}</button>
                     `)
                 }
             </script>
@@ -56,7 +56,7 @@
                 for (i = 0; i < midLetters.length; i++){
                     currString = midLetters.charAt(i).toUpperCase();
                     document.write(`
-                    <button class="keyboard-button" id="midLetters.charAt(i)" onclick='insertKey("${currString}")'>${midLetters.charAt(i).toUpperCase()}</button>
+                    <button class="keyboard-button" id="${midLetters.charAt(i)}" onclick='insertKey("${currString}")'>${midLetters.charAt(i).toUpperCase()}</button>
                     `)
                 }
             </script>
