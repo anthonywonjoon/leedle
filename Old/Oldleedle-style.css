@@ -1,0 +1,68 @@
+body {
+    background-color: #121213;
+}
+
+.header {
+    width:100%;
+    text-align: center;
+    color: white;
+}
+
+.sheet {
+    display: grid;
+    grid-template: 75px 75px 75px 75px 75px 75px / 75px 75px 75px 75px 75px;
+    width: 100%;
+    justify-content: center;
+    grid-row-gap: 10px;
+    grid-column-gap: 10px;
+}
+
+.sheet div {
+    border: 1px solid lightgray;
+    text-align: center;
+    
+}
+
+.letter_sheet {
+    padding-top: 200px;
+}
+
+.letter_sheet_row {
+    display:flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.letter_sheet_row button {
+    text-align:center;
+    width: 75px;
+    height: 75px;
+    margin: 10px;
+
+    cursor: pointer;
+
+    color: black;
+    border-radius:10px;
+    background-color: rgb(95, 95, 95);
+
+    font-size: 30px;
+}
+
+.filled-box {
+    color: white;
+    font-size: 30px;
+    font-weight: bolder;
+    vertical-align: center;
+}
+
+.correct {
+    background-color: green;
+}
+
+.has_letter {
+    background-color: yellow;
+}
+
+.incorrect {
+    background-color: grey;
+}

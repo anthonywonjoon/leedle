@@ -1,68 +1,41 @@
-body {
-    background-color: #121213;
-}
-
-.header {
-    width:100%;
+.leedle_header {
+    width: 100%;
     text-align: center;
-    color: white;
 }
 
-.sheet {
+.leedle_grid_container {
     display: grid;
-    grid-template: 75px 75px 75px 75px 75px 75px / 75px 75px 75px 75px 75px;
-    width: 100%;
-    justify-content: center;
-    grid-row-gap: 10px;
-    grid-column-gap: 10px;
-}
+    grid-template-columns: repeat(5, 75px);
+    grid-template-rows: repeat(6, 75px);
 
-.sheet div {
-    border: 1px solid lightgray;
+    width: 100%;
     text-align: center;
-    
+
+    justify-content: center;
 }
 
-.letter_sheet {
-    padding-top: 200px;
+.leedle_grid_container div {
+    border: 1px solid black;
 }
 
-.letter_sheet_row {
-    display:flex;
+.leedle_letter_top, .leedle_letter_bot {
+    display: grid;
+    grid-template-columns: repeat(10, 75px);
+    grid-template-rows: 75px;
+
     width: 100%;
     justify-content: center;
 }
 
-.letter_sheet_row button {
-    text-align:center;
-    width: 75px;
-    height: 75px;
-    margin: 10px;
+.leedle_letter_mid {
+    display: grid;
+    grid-template-columns: repeat(9, 75px);
+    grid-template-rows: 75px;
 
-    cursor: pointer;
-
-    color: black;
-    border-radius:10px;
-    background-color: rgb(95, 95, 95);
-
-    font-size: 30px;
+    width: 100%;
+    justify-content: center;
 }
 
-.filled-box {
-    color: white;
-    font-size: 30px;
-    font-weight: bolder;
-    vertical-align: center;
-}
-
-.correct {
-    background-color: green;
-}
-
-.has_letter {
-    background-color: yellow;
-}
-
-.incorrect {
-    background-color: grey;
+.letter {
+    border: 1px solid black;
 }
