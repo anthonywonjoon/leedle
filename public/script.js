@@ -7,9 +7,12 @@ let topLetters = "qwertyuiop";
 let midLetters = "asdfghjkl";
 let botLetters = "zxcvbnm";
 
-let row_guess = [false, false, false, false, false];
+let row_guess = [false, false, false, false, false]; // used to track if the previous row has been guessed
+let guesses_left = 6;
 
 let userGuess = "";
+// https://coolors.co/0b132b-1c2541-3a506b-5bc0be-6fffe9
+let gameOver = false;
 
 document.addEventListener("keyup", function(event) {
     var pressedKey = event.key.toUpperCase();
@@ -18,13 +21,19 @@ document.addEventListener("keyup", function(event) {
         removeKey();
     } else if (pressedKey == "ENTER"){
         guess();
-    } else {
+    } else if (pressedKey.length == 1){
         insertKey(pressedKey);
+    } else {
+        return;
     }
     
 })
 
 function insertKey(key) { // function for inserting key onclick, takes param key
+    if (gameOver == true){
+        return;
+    }
+    
     if (
         nextSpace == 5 && row_guess[0] == false || 
         nextSpace == 10 && row_guess[1] == false || 
@@ -41,7 +50,7 @@ function insertKey(key) { // function for inserting key onclick, takes param key
 }
 
 function removeKey(){ // function for removing the last key
-    if (nextSpace == 0 || nextSpace == 5 && row_guess[row - 1] == true ){
+    if (nextSpace == 0){
         return;
     }
     document.getElementsByClassName("box" + (nextSpace - 1))[row].innerHTML = "";
@@ -54,12 +63,14 @@ function guess() {
         return;
     }
 
+    guesses_left -= 1;
+
     tempGuess = userGuess.toLowerCase();
     for (i = 0; i < 5; i++){
         if (word.includes(tempGuess.charAt(i))){
             if (word.indexOf(tempGuess.charAt(i)) == i || word.lastIndexOf(tempGuess.charAt(i)) == i){
                 document.getElementsByClassName("box" + i)[row].classList.add("correct");
-                document.getElementsByClassName("box" + i)[row].classList.add("flip-horizontal-bottom");
+                document.getElementsByClassName("box" + i)[row].classList.add("jello-horizontal");
                 if (document.getElementById(tempGuess.charAt(i)).classList.contains("correct_letter")){
                     document.getElementById(tempGuess.charAt(i)).classList.remove("correct_letter");
                 }
@@ -67,15 +78,15 @@ function guess() {
                 
             } else {
                 document.getElementsByClassName("box" + i)[row].classList.add("correct_letter");
+                document.getElementsByClassName("box" + i)[row].classList.add("jello-horizontal");
                 document.getElementById(tempGuess.charAt(i)).classList.add("correct_letter");
             }
         } else {
             document.getElementsByClassName("box" + i)[row].classList.add("incorrect");
+            document.getElementsByClassName("box" + i)[row].classList.add("jello-horizontal");
             document.getElementById(tempGuess.charAt(i)).classList.add("incorrect");
         }
     }
-
-
 
     if (document.getElementsByClassName("box" + 0)[row].classList.contains("correct") &&
         document.getElementsByClassName("box" + 1)[row].classList.contains("correct") &&
@@ -84,9 +95,23 @@ function guess() {
         document.getElementsByClassName("box" + 4)[row].classList.contains("correct") 
         ) {
             alert("You Win!");
+            gameOver = true;
         }
 
+    if (guesses_left == 0){
+        if (
+            !document.getElementsByClassName("box" + 0)[row].classList.contains("correct") ||
+            !document.getElementsByClassName("box" + 1)[row].classList.contains("correct") ||
+            !document.getElementsByClassName("box" + 2)[row].classList.contains("correct") ||
+            !document.getElementsByClassName("box" + 3)[row].classList.contains("correct") ||
+            !document.getElementsByClassName("box" + 4)[row].classList.contains("correct")
+            ) {
+                alert("You lose! The word was " + word);
+                gameOver = true;
+            }
+    }
 
+    
     nextSpace = 0;
     row_guess[row] = true;
     row++;
