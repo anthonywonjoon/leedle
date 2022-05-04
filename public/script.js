@@ -11,7 +11,7 @@ let row_guess = [false, false, false, false, false]; // used to track if the pre
 let guesses_left = 6;
 
 let userGuess = "";
-// https://coolors.co/0b132b-1c2541-3a506b-5bc0be-6fffe9
+
 let gameOver = false;
 
 document.addEventListener("keyup", function(event) {
@@ -62,10 +62,12 @@ function guess() {
     if (nextSpace != 5){
         return;
     }
-
-    guesses_left -= 1;
-
     tempGuess = userGuess.toLowerCase();
+    if (!WORDS.includes(tempGuess)){
+        alert("Please enter a real word");
+        return;
+    }
+    guesses_left -= 1;
     for (i = 0; i < 5; i++){
         if (word.includes(tempGuess.charAt(i))){
             if (word.indexOf(tempGuess.charAt(i)) == i || word.lastIndexOf(tempGuess.charAt(i)) == i){

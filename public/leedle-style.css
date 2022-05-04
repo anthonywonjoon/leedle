@@ -6,12 +6,10 @@ body {
 }
 
 .leedle_header {
-    border-bottom: 1px solid black;
-}
-
-.leedle_header {
     width: 100%;
     text-align: center;
+    color: #3A506B;
+    border-bottom: 1px solid #3A506B;
 }
 
 .leedle_grid_container {
@@ -29,6 +27,7 @@ body {
 .leedle_grid_container div {
     border: 1px solid #3A506B;
     font-size: 30px;
+    color: #3A506B;
 }
 
 .leedle_letter_container {
@@ -45,7 +44,11 @@ body {
     width: 75px;
     height: 75px;
     margin: 5px;
-    background-color:#5BC0BE;
+    background-color:#0B132B;
+    color: #3A506B;
+
+    font-size: 30px;
+    font-family: 'Kanit', sans-serif;
 }
 
 .letter {
@@ -57,11 +60,11 @@ body {
 }
 
 .correct_letter {
-    background-color: yellow;
+    background-color: #E4DA1B;
 }
 
 .incorrect {
-    background-color: red;
+    background-color: #1C2541;
 }
 
 .jello-horizontal {
