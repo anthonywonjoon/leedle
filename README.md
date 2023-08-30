@@ -1,3 +1,5 @@
+# LEEDLE: The Wordle Clone
+
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
