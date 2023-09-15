@@ -5,6 +5,8 @@
 
 Leedle is a practice project of mine that I made after the surge in popularity around the web-game, Wordle.
 
+[Play the Game!](https://anthonywonjoon.github.io/leedle/index.html)
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built With
