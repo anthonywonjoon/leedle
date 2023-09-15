@@ -10,11 +10,11 @@
 </head>
 <body>
     <div class="leedle-navbar"><script>generateNavBar()</script></div>
-
+    
     <input class="nightToggle" id="nightToggle" type="checkbox">
     <label for="nightToggle" class="toggle-label"></label>
 
-    <div class="leedle-gameplay-container">
+    <div id="leedle-gameplay-container" class="leedle-gameplay-container">
         <table>
             <script>generateGameplayArea()</script>
         </table>
@@ -24,5 +24,34 @@
             <script>generateOnscreenKeyboard()</script>
         </div>
     </div>
+
+    <div class="leedle-modal-container" id="leedle-modal-container">
+        <div class="leedle-modal-message" id="leedle-modal-message"></div>
+    </div>
+    <div class="leedle-modal-warnings-container" id="leedle-modal-warnings-container">
+        <div class="leedle-modal-warning" id="leedle-modal-warning"></div>
+    </div>
+
+    <script>
+        const btn = document.getElementById("nightToggle");
+        const body = document.body;
+        const gameplayArea = document.getElementById("leedle-gameplay-container");
+        const table = gameplayArea.querySelector('table');
+        const headers = table.querySelectorAll('th');
+
+        function darkmodeToggle() {
+            if (!btn.checked) { 
+                body.classList.remove("dark", "dark-letters"); 
+                for (let i = 0; i < headers.length; i++) { headers[i].classList.remove("dark-letters"); }
+            }
+            else {
+                body.classList.add("dark");
+                for (let i = 0; i < headers.length; i++) { headers[i].classList.add("dark-letters"); }
+            }
+        }
+
+        btn.addEventListener("change", darkmodeToggle);
+    </script>
 </body>
+
 </html>

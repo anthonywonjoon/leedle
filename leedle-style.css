@@ -1,14 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Inclusive+Sans&display=swap');
+
+html {
+    font-size: 20px;
+}
+
+body {
+    background: white;
+    transition: background-color 600ms;
+}
 
 .leedle-gameplay-container table {
     border-collapse: separate;
-    border-spacing: 5px;
+    border-spacing: 0.25rem;
     margin: auto;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
 }
 
 .leedle-gameplay-container th{
     border: 2px solid lightgrey;
-    width: 50px;
-    height: 50px;
+    width: 3rem;
+    height: 3rem;
 
     font-size: 40px;
 }
@@ -20,10 +32,14 @@
 }
 
 .keyboard_row button {
-    width: 40px;
-    height: 50px;
-
+    width: 2rem;
+    height: 2.5rem;
+    margin-right: 0.25rem;
+    margin-bottom: 0.25rem;
     font-size: 20px;
+
+    font-family: 'Inclusive Sans', sans-serif;
+    color: black;
 }
 
 /* Nightmode toggle styles */
@@ -46,6 +62,14 @@ content: "☀️";
 /* Custom checked label text */  
 .nightToggle#nightToggle:checked + .toggle-label::after {
 content: "🌒";
+}
+
+.dark {
+    background: #121213
+}
+
+.dark-letters {
+    color: white;
 }
 
 .nightToggle {
