@@ -42,6 +42,19 @@ body {
     color: black;
 }
 
+/* Gameplay Coloring */
+.leedle-answer-incorrect {
+    background-color: #565758;
+}
+
+.leedle-answer-correct {
+    background-color: green;
+}
+
+.leedle-answer-present {
+    background-color: yellow;
+}
+
 /* Nightmode toggle styles */
 .toggle:before {
     content: '☀️';

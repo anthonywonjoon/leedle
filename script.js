@@ -65,7 +65,7 @@ function insertKey(pressedKey) {
     if (boxPointer == 0) { boxPointer++; }
     if (boxPointer == 6) { return; }
     document.getElementById(`box${boxPointer}_row${guess}`).innerHTML = pressedKey.toUpperCase();
-    userGuess += pressedKey;
+    userGuess += pressedKey.toLowerCase();
     boxPointer++;
 }
 
@@ -91,10 +91,10 @@ function submitGuess() {
         return;
     }
     
-    for (let i = 0; i < userGuess.length; i++) {
-        if (!leedleAnswer.includes(userGuess.charAt(i))) { document.getElementById(`box${boxPointer - 1}_row${guess}`).classList.add("leedle-answer-incorrect"); }
-        else if (userGuess.charAt(i) == leedleAnswer.charAt(i)) { document.getElementById(`box${boxPointer - 1}_row${guess}`).classList.add("leedle-answer-correct"); }
-        else if (leedleAnswer.includes(userGuess.charAt(i))) { document.getElementById(`box${boxPointer - 1}_row${guess}`).classList.add("leedle-answer-present"); }
+    for (let i = 1; i < 6; i++) {
+        if (!leedleAnswer.includes(userGuess.charAt(i - 1))) { document.getElementById(`box${i}_row${guess}`).classList.add("leedle-answer-incorrect"); }
+        else if (userGuess.charAt(i - 1) === leedleAnswer.charAt(i - 1)) { document.getElementById(`box${i}_row${guess}`).classList.add("leedle-answer-correct"); }
+        else if (leedleAnswer.includes(userGuess.charAt(i - 1))) { document.getElementById(`box${i}_row${guess}`).classList.add("leedle-answer-present"); }
     }
 
     if (document.getElementById(`box1_row${guess}`).classList.contains("leedle-answer-correct") &&
