@@ -4,7 +4,6 @@ let guess = 1;
 let boxPointer = 1;
 let userGuess = "";
 
-
 function generateNavBar() {
     document.write(`
         <table>
@@ -65,6 +64,7 @@ function insertKey(pressedKey) {
     if (boxPointer == 0) { boxPointer++; }
     if (boxPointer == 6) { return; }
     document.getElementById(`box${boxPointer}_row${guess}`).innerHTML = pressedKey.toUpperCase();
+    document.getElementById(`box${boxPointer}_row${guess}`).classList.add("leedle-answer-filledBox");
     userGuess += pressedKey.toLowerCase();
     boxPointer++;
 }
@@ -75,15 +75,19 @@ function removeKey() {
     boxPointer--;
     if (boxPointer == 0) { return; }
     document.getElementById(`box${boxPointer}_row${guess}`).innerHTML = "";
+    document.getElementById(`box${boxPointer}_row${guess}`).classList.remove("leedle-answer-filledBox");
     userGuess = userGuess.slice(0, -1);
 }
 
 function submitGuess() {
+    // warning for insufficent amount of letters in guess
     if (boxPointer < 6) {
         document.getElementById("leedle-modal-warnings-container").style.display= "block";
         document.getElementById("leedle-modal-warning").innerHTML = "Not enough letters";
         return; 
     }
+
+    // warning for if word does not exist
     if (userGuess == leedleAnswer) { winSequence(); return; }
     if (!WORDS.includes(userGuess)) {
         document.getElementById("leedle-modal-warnings-container").style.display= "block";
@@ -92,9 +96,10 @@ function submitGuess() {
     }
     
     for (let i = 1; i < 6; i++) {
-        if (!leedleAnswer.includes(userGuess.charAt(i - 1))) { document.getElementById(`box${i}_row${guess}`).classList.add("leedle-answer-incorrect"); }
-        else if (userGuess.charAt(i - 1) === leedleAnswer.charAt(i - 1)) { document.getElementById(`box${i}_row${guess}`).classList.add("leedle-answer-correct"); }
-        else if (leedleAnswer.includes(userGuess.charAt(i - 1))) { document.getElementById(`box${i}_row${guess}`).classList.add("leedle-answer-present"); }
+        document.getElementById(`box${i}_row${guess}`).classList.remove("leedle-answer-filledBox");
+        if (!leedleAnswer.includes(userGuess.charAt(i - 1))) { document.getElementById(`box${i}_row${guess}`).classList.add("leedle-answer-incorrect", "jello-horizontal"); }
+        else if (userGuess.charAt(i - 1) === leedleAnswer.charAt(i - 1)) { document.getElementById(`box${i}_row${guess}`).classList.add("leedle-answer-correct", "jello-horizontal"); }
+        else if (leedleAnswer.includes(userGuess.charAt(i - 1))) { document.getElementById(`box${i}_row${guess}`).classList.add("leedle-answer-present", "jello-horizontal"); }
     }
 
     if (document.getElementById(`box1_row${guess}`).classList.contains("leedle-answer-correct") &&
@@ -120,6 +125,14 @@ function winSequence() {
     document.getElementById("leedle-modal-message").innerHTML = "You Win!";
 }
 
+function loseSequence() {
+    document.getElementById("leedle-modal-container").style.display = "block";
+    document.getElementById("leedle-modal-message").innerHTML = `You lose! The correct answer was ${leedleAnswer}`;
+}
+
+function resetGame() {
+    generateGameplayArea();
+}
 
 
 

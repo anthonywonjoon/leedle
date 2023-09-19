@@ -9,11 +9,14 @@
     <title>Leedle | Word Guessing Game</title>
 </head>
 <body>
+    <!-- Generating the Navigation Bar-->
     <div class="leedle-navbar"><script>generateNavBar()</script></div>
     
+    <!-- Darkmode Toggle -->
     <input class="nightToggle" id="nightToggle" type="checkbox">
     <label for="nightToggle" class="toggle-label"></label>
 
+    <!-- Gameplay Section -->
     <div id="leedle-gameplay-container" class="leedle-gameplay-container">
         <table>
             <script>generateGameplayArea()</script>
@@ -25,6 +28,7 @@
         </div>
     </div>
 
+    <!-- Modal Container for Messages -->
     <div class="leedle-modal-container" id="leedle-modal-container">
         <div class="leedle-modal-message" id="leedle-modal-message"></div>
     </div>
@@ -32,6 +36,7 @@
         <div class="leedle-modal-warning" id="leedle-modal-warning"></div>
     </div>
 
+    <!-- Darkmode Toggle Logic-->
     <script>
         const btn = document.getElementById("nightToggle");
         const body = document.body;
